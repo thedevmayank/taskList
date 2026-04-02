@@ -88,7 +88,7 @@ export default function All() {
       </div>
 
 
-      {/* for mobile */}
+      {/* for mobile theme panel */}
 
       <div className={` md:hidden w-[80vw] fixed   left-[10vw] z-999 bg-white backdrop-blur-lg p-5 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'bottom-[5%] opacity-100 visible' : 'bottom-[-1%] invisible opacity-0'}`} >
         
@@ -124,7 +124,7 @@ function TaskInput(){
  const [sendBtn, setSendBtn] = useState("");
  const [inputValue, setInputValue] = useState("");
  return(
-  <>    <div className="md:w-[60vw] bg-[white]  p-2 rounded-lg ">
+  <>    <div className="md:w-[60vw] w-[90vw] bg-[white]  p-2 rounded-lg ">
        <form action=""  className="flex justify-between items-center" onSubmit={(e) => {
         e.preventDefault();
        }
