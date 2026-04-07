@@ -179,7 +179,7 @@ export default function All() {
 
             <FontAwesomeIcon
               icon={faCircleCheck}
-              className="text-green-500 text-[14px] opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out fixed right-10 "
+              className="text-green-500 text-[14px]  mr-4  "
             />
           </li>
           <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer" >
@@ -188,15 +188,15 @@ export default function All() {
             <FontAwesomeIcon
               icon={faTrashCan}
 
-              className="text-orange-500 text-[14px]  opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out fixed right-10 "
+              className="text-orange-500 text-[14px]  mr-4   "
             />
           </li>
-          <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-red-500 cursor-pointer" >
+          <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center  cursor-pointer" >
             <span className=" ">delete all tasks</span>
 
             <FontAwesomeIcon
               icon={faBroom}
-              className="text-red-500 text-[14px] opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out fixed right-10 "
+              className="text-red-500 text-[14px] mr-4  "
             />
           </li>
 
