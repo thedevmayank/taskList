@@ -32,8 +32,8 @@ const [activeItem, setActiveItem] = useState("");
   <ul className='ml-2 w-[92%] text-[14px]'>
 
     <Link to="/all" onClick={() => { setTaskBar(false); setActiveItem("all"); }}>
-      <li className={`p-1 rounded mt-2 flex gap-3 items-center  transition-colors duration-200 ease-in-out 
-        ${activeItem === "all" ? "bg-sky-200 text-black " : "hover:bg-sky-200 hover:text-white"}`}>
+      <li className={`p-2 rounded mt-2 flex gap-3 items-center  transition-colors duration-200 ease-in-out 
+        ${activeItem === "all" ? "bg-gray-200 text-black " : "hover:bg-gray-200 "}`}>
         
         <img src={All} width="15" />  
         All
@@ -41,8 +41,8 @@ const [activeItem, setActiveItem] = useState("");
     </Link>
 
     <Link to="/planned" onClick={() => { setTaskBar(false); setActiveItem("planned"); }}>
-      <li className={`p-1 rounded mt-2 flex gap-3 items-center transition-colors duration-200 ease-in-out
-        ${activeItem === "planned" ? "bg-sky-200 text-black " : "hover:bg-sky-200 hover:text-white"}`}>
+      <li className={`p-2 rounded mt-2 flex gap-3 items-center transition-colors duration-200 ease-in-out
+        ${activeItem === "planned" ? "bg-gray-200 text-black " : "hover:bg-gray-200 "}`}>
         
         <img src={activeItem === "planned" ? planned_fill : planned} width="15" />  
         Planned
@@ -50,8 +50,8 @@ const [activeItem, setActiveItem] = useState("");
     </Link>
 
     <Link to="/focused" onClick={() => { setTaskBar(false); setActiveItem("focused"); }}>
-      <li className={`p-1 rounded mt-2 flex gap-3 items-center transition-colors duration-200 ease-in-out
-        ${activeItem === "focused" ? "bg-sky-200 text-black " : "hover:bg-sky-200 hover:text-white"}`}>
+      <li className={`p-2 rounded mt-2 flex gap-3 items-center transition-colors duration-200 ease-in-out
+        ${activeItem === "focused" ? "bg-gray-200 text-black " : "hover:bg-gray-200 "}`}>
         
         <img src={activeItem === "focused" ? focus_fill : focus_blank} width="15" />  
         Focused
@@ -59,8 +59,8 @@ const [activeItem, setActiveItem] = useState("");
     </Link>
 
     <Link to="/tasks" onClick={() => { setTaskBar(false); setActiveItem("tasks"); }}>
-      <li className={`p-1 rounded mt-2 flex gap-3 items-center transition-colors duration-200 ease-in-out
-        ${activeItem === "tasks" ? "bg-sky-200 text-black " : "hover:bg-sky-200 hover:text-white"}`}>
+      <li className={`p-2 rounded mt-2 flex gap-3 items-center transition-colors duration-200 ease-in-out
+        ${activeItem === "tasks" ? "bg-gray-200 text-black " : "hover:bg-gray-200 "}`}>
         
         <img src={activeItem === "tasks" ? tasks_fill : tasks_blank} width="15" />  
         Tasks
