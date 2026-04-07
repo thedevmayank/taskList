@@ -3,6 +3,8 @@ import { PANELS } from "./constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import AllPic from "../assets/all.svg"
 import send from "../assets/send.svg"
 import send_fill from "../assets/send_fill.svg"
@@ -30,14 +32,7 @@ export default function All() {
   return (
 
     <>
-      {/* <button
-      onClick={() => {
-        setTaskBar(true);
-        setActivePanel(PANELS.ALL);
-      }}
-    >
-      <span className="text-[24px] font-bold">ALL TASKS</span>
-    </button> */}
+  
       <div className={`bg-[red] w-[100%] h-[100%] ${theme}   px-4 overflow-hidden `}>
         <div className="md:w-[75%] w-[100%] text-black flex justify-between items-center h-[13vh] px-4   py-2">
           <p className="md:text-[20px] text-[16px] font-bold flex gap-3 items-center">
@@ -49,14 +44,45 @@ export default function All() {
           }
           } className="cursor-pointer bg-white py-1 px-1  rounded-md transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
         </div>
-        <p className="bg-white backdrop-blur-lg p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm md:w-[60vw] text-black"
+
+      {/* tasks */}
+
+
+        <div className=" md:w-[60vw] h-[80vh] overflow-y-auto [scrollbar-width:none] flex flex-col gap-4">
+
+
+        <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black">
+       <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
+        <p className="bg-white w-full"
         onClick={() => {
           setTaskBar(true);
             setActivePanel(PANELS.ALL);
         } }>
-          hii thsi is mayank</p>
-       
+          java coding for 2hrs</p>
+          <FontAwesomeIcon icon={faPenToSquare} className="cursor-pointer text-blue-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-blue-700" onClick={() => {
+          setTaskBar(true);
+            setActivePanel(PANELS.ALL);
+        } } /  >
+          <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" />
+          
+        
+        </div>
+        <div className="bg-white backdrop-blur-lg  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black">
+          <input type="checkbox" name="" id="" />
+        <p className=""
+        onClick={() => {
+          setTaskBar(true);
+            setActivePanel(PANELS.ALL);
+        } }>
+          java coding for 2hrs</p>
+        
+        </div>
 
+        
+</div>
+
+
+{/* theme panel */}
         <div className={` hidden md:block md:w-[20vw] fixed  right-[3vw] z-990 bg-white backdrop-blur-lg p-6 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'top-[9%] opacity-100 visible ' : 'top-[3%] invisible opacity-0'}
         `} >
 
@@ -137,7 +163,7 @@ function TaskInput(){
         
         }} className=" p-1 font-smaller md:w-[50vw] outline-none bg-white style-none  " 
         />
-       <button type="submit" className="mr-2 p-2 bg-sky-500 w-10 h-10 group relative flex items-center justify-center  rounded-full hover:cursor-pointer " onClick={() => setSendBtn("send")} >
+       <button type="submit" className="mr-1 p-2 bg-sky-500 w-10 h-10 group relative flex items-center justify-center  rounded-full hover:cursor-pointer " onClick={() => setSendBtn("send")} >
           <img src={send} 
           width={20}
           alt="send" 
