@@ -16,6 +16,7 @@ export default function All() {
   const { setTaskBar, setActivePanel } = useOutletContext();
   const [activeEditPanel, setActiveEditPanel] = useState(false);
   const [closeIcon, setCloseIcon] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false)
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || "bg-gradient-to-r from-sky-300 to-blue-500"
   );
@@ -29,7 +30,7 @@ export default function All() {
       "bg-gradient-to-r from-[#89f7fe] to-[#66a6ff]",
       "bg-gradient-to-r from-[#8fd3f4] to-[#fda085]",
       "bg-gradient-to-r from-sky-300 to-blue-500",
-      "bg-gradient-to-r from-[#ff9a9e] to-[#fad0c4]",
+      "bg-gradient-to-br from-indigo-300 via-purple-300 to-pink-300 ",
       "bg-gradient-to-r from-[#cfd9df] to-[#e2ebf0]"
 
     ]
@@ -53,6 +54,7 @@ export default function All() {
           } className="cursor-pointer bg-white py-1 px-1  rounded-md transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
         </div>
 
+
         {/* tasks */}
 
 
@@ -71,7 +73,9 @@ export default function All() {
               setTaskBar(true);
               setActivePanel(PANELS.ALL);
             }} />
-            <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" />
+            <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" onClick={() => {
+              setDeleteModal(true)
+            }} />
 
           </div>
 
@@ -91,7 +95,26 @@ export default function All() {
 
           </div>
 
+          {/* for delete modal */}
 
+          <div className={`${deleteModal ? "fixed inset-0 flex items-center justify-center bg-black/50 z-1003 visible" : "invisible"}`}>
+            <div className="w-[90%] max-w-md bg-white p-5 rounded-xl shadow-lg">
+              <h2 className="text-lg font-semibold mb-4">Delete Task</h2>
+              <p className="mb-4">Are you sure you want to delete this task?</p>
+
+              <div className="flex justify-end gap-2">
+                <button className="px-4 py-2 bg-gray-200 rounded cursor-pointer hover:bg-sky-400  hover:text-white" onClick={() => {
+              setDeleteModal(false)
+            }}  >
+              Cancel</button>
+                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={() => {
+              setDeleteModal(false)
+            }} >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
 
         </div>
 
@@ -110,7 +133,7 @@ export default function All() {
                   <div
                     key={index}
                     onClick={() => setTheme(color)}
-                    className={`${color} w-8 h-8 rounded-full cursor-pointer 
+                    className={`${color} w-8 h-8 rounded-full cursor-pointer hover:border hover:shadow-lg 
                       ${theme === color ? "ring-2 ring-black scale-110" : ""}`}
                   />
                 );
@@ -150,11 +173,20 @@ export default function All() {
           setActiveEditPanel(false)
           setCloseIcon(!closeIcon)
         }}></div>
+
         <div className="fixed bottom-7 md:bottom-14   ">
           <TaskInput />
+
         </div>
 
+
+
+
+
+
       </div>
+
+
 
 
       {/* for mobile theme panel */}
@@ -171,7 +203,8 @@ export default function All() {
                 <div
                   key={index}
                   onClick={() => setTheme(color)}
-                  className={`${color} w-8 h-8 rounded-full cursor-pointer hover:border hover:shadow-lg `}
+                  className={`${color} w-8 h-8 rounded-full cursor-pointer hover:border hover:shadow-lg 
+                  ${theme === color ? "ring-2 ring-black scale-110" : ""}`}
                 />
               );
             })
