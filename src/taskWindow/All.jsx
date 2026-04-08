@@ -10,16 +10,16 @@ import { faBroom } from '@fortawesome/free-solid-svg-icons'
 import AllPic from "../assets/all.svg"
 import send from "../assets/send.svg"
 import send_fill from "../assets/send_fill.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function All() {
   const { setTaskBar, setActivePanel } = useOutletContext();
   const [activeEditPanel, setActiveEditPanel] = useState(false);
   const [closeIcon, setCloseIcon] = useState(false);
-  const [theme, setTheme] = useState("bg-gradient-to-r from-[#a8edea] to-[#fed6e3]")
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "bg-gradient-to-r from-sky-300 to-blue-500"
+  );
   const [activeItem, setActiveItem] = useState(false);
-
-
 
   let bgColors =
     [
@@ -33,11 +33,15 @@ export default function All() {
       "bg-gradient-to-r from-[#cfd9df] to-[#e2ebf0]"
 
     ]
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
 
     <>
 
-      <div className={` w-[100%] h-[100%] ${theme}   px-4 overflow-hidden `}>
+      <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] h-[100%] ${theme}   px-4 overflow-hidden `}>
         <div className="md:w-[75%] w-[100%] text-black flex justify-between items-center h-[13vh] px-4   py-2">
           <p className="md:text-[20px] text-[16px] font-bold flex gap-3 items-center">
             <img src={AllPic} alt="" width="30" height="30" className="hidden md:block  " />  ALL TASKS</p>
@@ -71,7 +75,7 @@ export default function All() {
 
           </div>
 
-             <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black">
+          <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black">
             <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
             <p className="bg-white w-full"
               onClick={() => {
@@ -106,7 +110,8 @@ export default function All() {
                   <div
                     key={index}
                     onClick={() => setTheme(color)}
-                    className={`${color} w-8 h-8 rounded-full cursor-pointer hover:border hover:shadow-lg`}
+                    className={`${color} w-8 h-8 rounded-full cursor-pointer 
+                      ${theme === color ? "ring-2 ring-black scale-110" : ""}`}
                   />
                 );
               })
