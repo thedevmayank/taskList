@@ -21,7 +21,7 @@ hidden md:grid md:grid-cols-[15%_auto]
 rounded-lg mt-5 shadow-lg'>
 
   {/* Sidebar */}
-  <div className='md:block md:rounded-tl-lg md:rounded-bl-lg bg-[#f5f5f5] shadow-md '>
+  <div className='md:block md:rounded-tl-lg md:rounded-bl-lg bg-[white] shadow-md '>
     <Layout taskBar={taskBar} setTaskBar={setTaskBar} />
   </div>
 
@@ -48,7 +48,7 @@ rounded-lg mt-5 shadow-lg'>
 
   <FontAwesomeIcon icon={faBars} className="fixed z-99 top-[3.3%] left-[5%]" onClick={() =>{setMobileMenu(!mobileMenu)}}/>
  
-  <div className={`fixed transition-transform bg-[#f5f5f5]  z-1002 duration-300 md:hidden ease-in-out overflow-hidden h-[100vh] w-[55vw] ${mobileMenu ? 'translate-x-0' : '-translate-x-full'}`}>
+  <div className={`fixed transition-transform bg-[white]  z-1002 duration-300 md:hidden ease-in-out overflow-hidden h-[100vh] w-[55vw] ${mobileMenu ? 'translate-x-0' : '-translate-x-full'}`}>
     <Layout taskBar={taskBar} setTaskBar={setTaskBar}/>
      
      

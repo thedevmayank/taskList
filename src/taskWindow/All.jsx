@@ -58,10 +58,11 @@ export default function All() {
         {/* tasks */}
 
 
-        <div className=" md:w-[60vw] h-[80vh] overflow-y-auto [scrollbar-width:none] flex flex-col gap-4">
+        <div className=" md:w-[60vw] h-[80vh] overflow-y-auto [scrollbar-width:none] flex flex-col gap-4 p-2">
 
 
-          <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black">
+          <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-300 ease-in-out
+    hover:-translate-y-1 hover:scale-101 hover:shadow-lg">
             <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
             <p className="bg-white w-full"
               onClick={() => {
@@ -78,8 +79,9 @@ export default function All() {
             }} />
 
           </div>
-
-          <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black">
+          
+           <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-300 ease-in-out
+    hover:-translate-y-1 hover:scale-101 hover:shadow-lg">
             <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
             <p className="bg-white w-full"
               onClick={() => {
@@ -91,9 +93,12 @@ export default function All() {
               setTaskBar(true);
               setActivePanel(PANELS.ALL);
             }} />
-            <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" />
+            <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" onClick={() => {
+              setDeleteModal(true)
+            }} />
 
           </div>
+          
 
           {/* for delete modal */}
 
