@@ -17,6 +17,7 @@ export default function All() {
   const [activeEditPanel, setActiveEditPanel] = useState(false);
   const [closeIcon, setCloseIcon] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false)
+   const [movingTasks, setMovingTasks] = useState(false);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || "bg-gradient-to-r from-sky-300 to-blue-500"
   );
@@ -35,7 +36,7 @@ export default function All() {
 
     ]
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("theme", theme,"tasks",);
   }, [theme]);
 
   return (
@@ -58,11 +59,12 @@ export default function All() {
         {/* tasks */}
 
 
-        <div className=" md:w-[60vw] h-[80vh] overflow-y-auto [scrollbar-width:none] flex flex-col gap-4 p-2">
+        <div className=" md:w-[60vw] h-[76%] max-h-md relative    overflow-y-auto [scrollbar-width:none] flex flex-col   gap-4 p-3">
 
 
-          <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-300 ease-in-out
-    hover:-translate-y-1 hover:scale-101 hover:shadow-lg">
+          <div className={`bg-white absolute w-[99%] inset-x-0 mx-auto  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
+    hover:-translate-y-1 hover:scale-101 hover:shadow-lg 
+           ${movingTasks ? "-translate-y-0 opacity-100 visible rotate-0" : "translate-y-115 opacity-0 invisible rotate-18"}`}>
             <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
             <p className="bg-white w-full"
               onClick={() => {
@@ -80,24 +82,7 @@ export default function All() {
 
           </div>
           
-           <div className="bg-white  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-300 ease-in-out
-    hover:-translate-y-1 hover:scale-101 hover:shadow-lg">
-            <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
-            <p className="bg-white w-full"
-              onClick={() => {
-                setTaskBar(true);
-                setActivePanel(PANELS.ALL);
-              }}>
-              java coding for 2hrs</p>
-            <FontAwesomeIcon icon={faPenToSquare} className="cursor-pointer text-blue-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-blue-700" onClick={() => {
-              setTaskBar(true);
-              setActivePanel(PANELS.ALL);
-            }} />
-            <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" onClick={() => {
-              setDeleteModal(true)
-            }} />
-
-          </div>
+          
           
 
           {/* for delete modal */}
@@ -113,7 +98,8 @@ export default function All() {
             }}  >
               Cancel</button>
                 <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={() => {
-              setDeleteModal(false)
+                setDeleteModal(false)
+                setMovingTasks(false)
             }} >
                   Delete
                 </button>
@@ -180,7 +166,7 @@ export default function All() {
         }}></div>
 
         <div className="fixed bottom-7 md:bottom-14   ">
-          <TaskInput />
+          <TaskInput movingTasks={movingTasks} setMovingTasks={setMovingTasks} />
 
         </div>
 
@@ -258,11 +244,11 @@ export default function All() {
 {/* task input */ }
 
 
-function TaskInput() {
-  const [sendBtn, setSendBtn] = useState("");
+function TaskInput({ movingTasks, setMovingTasks }) {
   const [inputValue, setInputValue] = useState("");
+ 
   return (
-    <>    <div className="md:w-[60vw] w-[90vw] bg-[white]  p-2 rounded-lg ">
+    <>    <div className="md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg ">
       <form action="" className="flex justify-between items-center" onSubmit={(e) => {
         e.preventDefault();
       }
@@ -275,7 +261,7 @@ function TaskInput() {
 
         }} className=" p-1 font-smaller md:w-[50vw] outline-none bg-white style-none  "
         />
-        <button type="submit" className="mr-1 p-2 bg-sky-500 w-10 h-10 group relative flex items-center justify-center  rounded-full hover:cursor-pointer " onClick={() => setSendBtn("send")} >
+        <button type="submit" className="mr-1 p-2 bg-sky-500 w-10 h-10 group relative flex items-center justify-center  rounded-full hover:cursor-pointer " onClick={() => setMovingTasks(true)}>
           <img src={send}
             width={20}
             alt="send"
