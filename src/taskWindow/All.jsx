@@ -6,6 +6,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { faBroom } from '@fortawesome/free-solid-svg-icons'
+import noAllTaskImage from "../assets/Cute penguin planning something great.png"
 
 import AllPic from "../assets/all.svg"
 import send from "../assets/send.svg"
@@ -80,14 +81,14 @@ useEffect(() => {
         {/* tasks */}
 
 
-        <div className=" md:w-[60vw] h-[76%] max-h-md     overflow-y-auto [scrollbar-width:none] flex flex-col   gap-4 p-3">
+        <div className=" md:w-[60vw] h-[76%]     overflow-y-auto [scrollbar-width:none] flex flex-col   gap-4 p-3">
 
           {
             oldtaskData.length >= 1
             ?
-              oldtaskData.map((task, index) => {
+              oldtaskData.map((task) => {
                 return (
-                  <div className={`bg-white  w-[99%] inset-x-0 mx-auto  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
+                  <div className={`bg-white w-[100%]   backdrop-blur-lg flex  gap-2 justify-between  py-4 px-2 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
     hover:-translate-y-1 hover:scale-101 hover:shadow-lg ${task.id === newTaskId 
     ? "translate-y-115 opacity-0 animate-slideUp rotate-18" 
     : "translate-y-0 opacity-100 rotate-0" }
@@ -111,7 +112,9 @@ useEffect(() => {
                 )
               })
             :
-            "No tasks added yet"
+            <div className="max-w-[50%]  mt-7 mx-auto ">
+              <img src={noAllTaskImage} width="200" height="200" alt="No tasks available" />
+            </div>
           }
 
         
@@ -319,7 +322,7 @@ const [shake, setShake] = useState(false);
   return (
     <>    <div className={`md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg  ${shake ? 'animate-shake border border-red-500' : ''} shadow-lg mx-auto`}>
       <form action="" className="flex justify-between items-center" onSubmit={handleSubmit}>
-        <input type="text" name="taskInput" placeholder="enter task"  value={inputValue}
+        <input type="text" name="taskInput" placeholder="Add task"  value={inputValue}
         className={` p-1 font-smaller md:w-[50vw] outline-none bg-white style-none `}
         onChange={(e) => {
           setInputValue(e.target.value.trimStart())
