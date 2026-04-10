@@ -18,10 +18,13 @@ export default function All() {
   const [closeIcon, setCloseIcon] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false)
    const [movingTasks, setMovingTasks] = useState(false);
-  const [theme, setTheme] = useState(
+    const [inputValue, setInputValue] = useState("");
+  const [activeItem, setActiveItem] = useState(false);
+
+ const [theme, setTheme] = useState(
     localStorage.getItem("theme") || "bg-gradient-to-r from-sky-300 to-blue-500"
   );
-  const [activeItem, setActiveItem] = useState(false);
+ 
 
   let bgColors =
     [
@@ -29,16 +32,21 @@ export default function All() {
       "bg-gradient-to-r from-[#e0c3fc] to-[#8ec5fc]",
       "bg-gradient-to-r from-[#d4fc79] to-[#96e6a1]",
       "bg-gradient-to-r from-[#89f7fe] to-[#66a6ff]",
-      "bg-gradient-to-r from-[#8fd3f4] to-[#fda085]",
+      "bg-gradient-to-br from-[#fde047] to-[#38bdf8]",
       "bg-gradient-to-r from-sky-300 to-blue-500",
       "bg-gradient-to-br from-indigo-300 via-purple-300 to-pink-300 ",
       "bg-gradient-to-r from-[#cfd9df] to-[#e2ebf0]"
 
     ]
-  useEffect(() => {
-    localStorage.setItem("theme", theme,"tasks",);
-  }, [theme]);
+ const [oldtaskData, setOldTaskData] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || []
+  );
 
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  
   return (
 
     <>
@@ -61,6 +69,35 @@ export default function All() {
 
         <div className=" md:w-[60vw] h-[76%] max-h-md relative    overflow-y-auto [scrollbar-width:none] flex flex-col   gap-4 p-3">
 
+          {
+            oldtaskData.length >= 1
+            ?
+              oldtaskData.map((task, index) => {
+                return (
+                  <div className={`bg-white absolute w-[99%] inset-x-0 mx-auto  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
+    hover:-translate-y-1 hover:scale-101 hover:shadow-lg 
+           ${movingTasks ? "-translate-y-0 opacity-100 visible rotate-0" : "translate-y-115 opacity-0 invisible rotate-18"}`}>
+            <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
+            <p className="bg-white w-full"
+              onClick={() => {
+                setTaskBar(true);
+                setActivePanel(PANELS.ALL);
+              }}>
+              {task.taskName}</p>
+            <FontAwesomeIcon icon={faPenToSquare} className="cursor-pointer text-blue-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-blue-700" onClick={() => {
+              setTaskBar(true);
+              setActivePanel(PANELS.ALL);
+            }} />
+            <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" onClick={() => {
+              setDeleteModal(true)
+            }} />
+
+          </div>
+                )
+              })
+            :
+            "No tasks added yet"
+          }
 
           <div className={`bg-white absolute w-[99%] inset-x-0 mx-auto  backdrop-blur-lg flex items-center gap-2 justify-between  p-4 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
     hover:-translate-y-1 hover:scale-101 hover:shadow-lg 
@@ -71,7 +108,7 @@ export default function All() {
                 setTaskBar(true);
                 setActivePanel(PANELS.ALL);
               }}>
-              java coding for 2hrs</p>
+              {inputValue}</p>
             <FontAwesomeIcon icon={faPenToSquare} className="cursor-pointer text-blue-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-blue-700" onClick={() => {
               setTaskBar(true);
               setActivePanel(PANELS.ALL);
@@ -125,7 +162,7 @@ export default function All() {
                     key={index}
                     onClick={() => setTheme(color)}
                     className={`${color} w-8 h-8 rounded-full cursor-pointer hover:border hover:shadow-lg 
-                      ${theme === color ? "ring-2 ring-black scale-110" : ""}`}
+                      ${theme === color ? "ring-1 ring-black scale-110" : ""}`}
                   />
                 );
               })
@@ -166,7 +203,7 @@ export default function All() {
         }}></div>
 
         <div className="fixed bottom-7 md:bottom-14   ">
-          <TaskInput movingTasks={movingTasks} setMovingTasks={setMovingTasks} />
+          <TaskInput  setMovingTasks={setMovingTasks} inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} />
 
         </div>
 
@@ -244,24 +281,37 @@ export default function All() {
 {/* task input */ }
 
 
-function TaskInput({ movingTasks, setMovingTasks }) {
-  const [inputValue, setInputValue] = useState("");
+function TaskInput({  setMovingTasks,inputValue, setInputValue,oldtaskData, setOldTaskData }) {
  
+
+    const handleSubmit = (e) => {
+
+      let obj = {
+        taskName: inputValue,
+        status: false,
+        id: Date.now()
+      }
+     
+      setMovingTasks(true)
+     let  copyData = [...oldtaskData, obj]
+     setOldTaskData(copyData)
+      localStorage.setItem("tasks", JSON.stringify(copyData))
+        setInputValue("")
+         e.preventDefault();
+      // Handle form submission logic here
+    };
+
   return (
     <>    <div className="md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg ">
-      <form action="" className="flex justify-between items-center" onSubmit={(e) => {
-        e.preventDefault();
-      }
-      }>
+      <form action="" className="flex justify-between items-center" onSubmit={handleSubmit}>
         <input type="text" name="taskInput" placeholder="enter task" value={inputValue} onChange={(e) => {
           setInputValue(e.target.value)
-          let name = e.target.value;
-          console.log(name);
+        
 
 
         }} className=" p-1 font-smaller md:w-[50vw] outline-none bg-white style-none  "
         />
-        <button type="submit" className="mr-1 p-2 bg-sky-500 w-10 h-10 group relative flex items-center justify-center  rounded-full hover:cursor-pointer " onClick={() => setMovingTasks(true)}>
+        <button type="submit" className="mr-1 p-2 bg-sky-500 w-10 h-10 group relative flex items-center justify-center  rounded-full hover:cursor-pointer hover:bg-sky-600 transition duration-300 ease-in-out">
           <img src={send}
             width={20}
             alt="send"
