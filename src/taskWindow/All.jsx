@@ -113,7 +113,7 @@ useEffect(() => {
               })
             :
             <div className="max-w-[50%]  mt-7 mx-auto ">
-              <img src={noAllTaskImage} width="200" height="200" alt="No tasks available" />
+              <img src={noAllTaskImage} width="300" height="300" alt="No tasks available" />
             </div>
           }
 
