@@ -10,6 +10,7 @@ function App() {
   const [taskBar, setTaskBar] = useState(false);
   const [activePanel, setActivePanel] = useState("");
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [selectedTaskItem, setSelectedTaskItem] = useState(null);
 
   
   return (
@@ -28,12 +29,14 @@ rounded-lg mt-5 shadow-lg'>
   {/* Main Content */}
   <div className='relative overflow-hidden md:rounded-tr-lg md:rounded-br-lg shadow-md   duration-300 ease-in-out'>
     
-    <Outlet context={{ setTaskBar, setActivePanel }} />
+    <Outlet context={{ setTaskBar, setActivePanel, setSelectedTaskItem }} />
 
     <TaskBar
       taskBar={taskBar}
       setTaskBar={setTaskBar}
       activePanel={activePanel}
+      selectedTaskItem={selectedTaskItem}
+      setSelectedTaskItem={setSelectedTaskItem}
     />
   </div>
 
@@ -58,12 +61,13 @@ rounded-lg mt-5 shadow-lg'>
   {/* Main Content */}
   <div className='relative flex overflow-hidden '>
     
-    <Outlet context={{ setTaskBar, setActivePanel }} />
+    <Outlet context={{ setTaskBar, setActivePanel, setSelectedTaskItem }} />
 
     <TaskBar
       taskBar={taskBar}
       setTaskBar={setTaskBar}
       activePanel={activePanel}
+      setSelectedTaskItem={setSelectedTaskItem}
      
     />
   </div>

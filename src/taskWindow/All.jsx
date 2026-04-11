@@ -11,21 +11,24 @@ import noAllTaskImage from "../assets/Cute penguin planning something great.png"
 import AllPic from "../assets/all.svg"
 import send from "../assets/send.svg"
 import send_fill from "../assets/send_fill.svg"
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function All() {
-  const { setTaskBar, setActivePanel } = useOutletContext();
+  const { setTaskBar, setActivePanel , setSelectedTaskItem } = useOutletContext();
   const [activeEditPanel, setActiveEditPanel] = useState(false);
   const [closeIcon, setCloseIcon] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false)
-    const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [activeItem, setActiveItem] = useState(false);
   const [newTaskId, setNewTaskId] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const [completedTaskModal, setCompletedTaskModal] = useState(false);
 
- const [theme, setTheme] = useState(
+  const [theme, setTheme] = useState(
     localStorage.getItem("theme") || "bg-gradient-to-r from-sky-300 to-blue-500"
   );
- 
+
 
   let bgColors =
     [
@@ -39,28 +42,28 @@ export default function All() {
       "bg-gradient-to-r from-[#cfd9df] to-[#e2ebf0]"
 
     ]
-const [oldtaskData, setOldTaskData] = useState(() => {
-  try {
-    const data = localStorage.getItem("tasks");
-    return data ? JSON.parse(data) : [];
-  } catch {
-    return [];
-  }
-});
+  const [oldtaskData, setOldTaskData] = useState(() => {
+    try {
+      const data = localStorage.getItem("tasks");
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
+  });
 
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
-  
- useEffect(() => {
-  localStorage.setItem("tasks", JSON.stringify(oldtaskData));
-}, [oldtaskData]);
-useEffect(() => {
-  if (newTaskId) {
-    setTimeout(() => setNewTaskId(null), 200);
-  }
-}, [newTaskId]);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(oldtaskData));
+  }, [oldtaskData]);
+  useEffect(() => {
+    if (newTaskId) {
+      setTimeout(() => setNewTaskId(null), 200);
+    }
+  }, [newTaskId]);
   return (
 
     <>
@@ -83,44 +86,63 @@ useEffect(() => {
 
         <div className=" md:w-[60vw] h-[76%]     overflow-y-auto [scrollbar-width:none] flex flex-col   gap-4 p-3">
 
+         
           {
             oldtaskData.length >= 1
-            ?
+              ?
               oldtaskData.map((task) => {
                 return (
-                  <div className={`bg-white w-[100%]   backdrop-blur-lg flex  gap-2 justify-between  py-4 px-2 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
-    hover:-translate-y-1 hover:scale-101 hover:shadow-lg ${task.id === newTaskId 
-    ? "translate-y-115 opacity-0 animate-slideUp rotate-18" 
-    : "translate-y-0 opacity-100 rotate-0" }
-           `}>
-            <input type="checkbox" name="" id="" className="outline-none bg-sky-200" />
-            <p className="bg-white w-full"
-              onClick={() => {
-                setTaskBar(true);
-                setActivePanel(PANELS.ALL);
-              }}>
-              {task.taskName}</p>
-            <FontAwesomeIcon icon={faPenToSquare} className="cursor-pointer text-blue-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-blue-700" onClick={() => {
-              setTaskBar(true);
-              setActivePanel(PANELS.ALL);
-            }} />
-            <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" onClick={() => {
-              setDeleteModal(true)
-            }} />
 
-          </div>
+                  <>
+                   <div className={`bg-white w-[100%]   backdrop-blur-lg flex  gap-2 justify-between  py-4 px-3 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
+                  hover:-translate-y-1 hover:scale-101 hover:shadow-lg ${task.id === newTaskId
+                      ? "translate-y-115 opacity-0 animate-slideUp rotate-18"
+                      : "translate-y-0 opacity-100 rotate-0"}
+                      `} onClick={() => setSelectedTaskItem(task)}>
+                    <input type="checkbox" checked={task.status} id="" className="outline-none bg-sky-200"
+                      onChange={() => {
+                        let updatedData = oldtaskData.map(t => {
+                          if (t.id === task.id) {
+                            return { ...t, status: !t.status };
+                          }
+                          return t;
+                        });
+                        setOldTaskData(updatedData);
+                      }} />
+                    <p className="bg-white w-full"
+                      onClick={() => {
+                        setTaskBar(true);
+                        setActivePanel(PANELS.ALL);
+                          
+                      }}>
+                      {task.taskName}</p>
+                    <FontAwesomeIcon icon={faPenToSquare} className="cursor-pointer text-blue-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-blue-700" onClick={() => {
+                      setTaskBar(true);
+                      setActivePanel(PANELS.ALL);
+                    
+                    }} />
+                    <FontAwesomeIcon icon={faTrashCan} className="cursor-pointer text-red-500 transition  duration-300 ease-in-out hover:rotate-18  hover:text-red-600" onClick={() => {
+                      setDeleteModal(true)
+                      setSelectedTaskId(task.id)
+                    }} />
+
+                  </div>
+                  </>
+                 
                 )
               })
-            :
-            <div className="max-w-[50%]  mt-7 mx-auto ">
-              <img src={noAllTaskImage} width="300" height="300" alt="No tasks available" />
-            </div>
+
+              
+              :
+              <div className="max-w-[50%]  mt-7 mx-auto ">
+                <img src={noAllTaskImage} width="300" height="300" alt="No tasks available" />
+              </div>
           }
 
-        
-          
-          
-          
+
+
+
+
 
           {/* for delete modal */}
 
@@ -131,16 +153,14 @@ useEffect(() => {
 
               <div className="flex justify-end gap-2">
                 <button className="px-4 py-2 bg-gray-200 rounded cursor-pointer hover:bg-sky-400  hover:text-white" onClick={() => {
-              setDeleteModal(false)
-            }}  >
-              Cancel</button>
+                  setDeleteModal(false)
+                }}  >
+                  Cancel</button>
                 <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={(index) => {
-                setDeleteModal(false)
-                let deleteData = [...oldtaskData]
-                deleteData.splice(index, 1)
-                setOldTaskData(deleteData)
-              
-            }} >
+                  setDeleteModal(false)
+                  const updated = oldtaskData.filter(t => t.id !== selectedTaskId);
+                  setOldTaskData(updated);
+                }} >
                   Delete
                 </button>
               </div>
@@ -172,22 +192,29 @@ useEffect(() => {
             } </div>
           <ul className="text-[14px]">
             <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group   hover:text-green-500 cursor-pointer" >
-              <span className=" ">mark as complete</span>
+              <span onClick={() => {
+                const filteredTasks = oldtaskData.filter(task => !task.status);
+                setOldTaskData(filteredTasks);
+                setActiveEditPanel(false)
+                setCloseIcon(false)
+                setActiveItem(false)
+              }}>mark as complete</span>
 
               <FontAwesomeIcon
                 icon={faCircleCheck}
                 className="text-green-500 text-[14px] opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out right-10 group-hover:rotate-18 mr-2 "
               />
             </li>
-            <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer" >
-              <span  onClick={(index) => {
-                if (checked )
-                setDeleteModal(false)
-                let deleteData = [...oldtaskData]
-                deleteData.splice(index, 1)
-                setOldTaskData(deleteData)
-              
-            }} >delete task</span>
+            <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer"
+              onClick={() => {
+                const filteredTasks = oldtaskData.filter(task => !task.status);
+                setOldTaskData(filteredTasks);
+                {setActiveEditPanel(false)
+                setCloseIcon(false)
+                setActiveItem(false)
+                } 
+              }} >
+              <span >delete task</span>
 
               <FontAwesomeIcon
                 icon={faTrashCan}
@@ -195,8 +222,14 @@ useEffect(() => {
                 className="text-orange-500 text-[14px]  opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out  group-hover:rotate-18 mr-2"
               />
             </li>
-            <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-red-500 cursor-pointer" >
-              <span className=" ">delete all tasks</span>
+            <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-red-500 cursor-pointer" onClick={() =>{
+              setOldTaskData([])
+             {setActiveEditPanel(false)
+                setCloseIcon(false)
+                setActiveItem(false)
+             }
+            }} >
+              <span>delete all tasks</span>
 
               <FontAwesomeIcon
                 icon={faBroom}
@@ -213,7 +246,7 @@ useEffect(() => {
         }}></div>
 
         <div className="fixed bottom-7 md:bottom-14   ">
-          <TaskInput  inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setNewTaskId={setNewTaskId} />
+          <TaskInput inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setNewTaskId={setNewTaskId} />
 
         </div>
 
@@ -291,45 +324,45 @@ useEffect(() => {
 {/* task input */ }
 
 
-function TaskInput({ inputValue, setInputValue,oldtaskData, setOldTaskData,setNewTaskId }) {
- 
-const [shake, setShake] = useState(false);
-    const handleSubmit = (e) => {
- e.preventDefault();
+function TaskInput({ inputValue, setInputValue, oldtaskData, setOldTaskData, setNewTaskId }) {
 
-        if (!inputValue.trim()) {
-       setShake(true);
+  const [shake, setShake] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    // remove shake after animation ends
-    setTimeout(() => setShake(false), 400);
-    return;
-  }
-      let obj = {
-        taskName: inputValue,
-        status: false,
-        id: Date.now()
-      }
-     
+    if (!inputValue.trim()) {
+      setShake(true);
+
+      // remove shake after animation ends
+      setTimeout(() => setShake(false), 400);
+      return;
+    }
+    let obj = {
+      taskName: inputValue,
+      status: false,
+      id: Date.now()
+    }
+
     setNewTaskId(obj.id)
-     let  copyData = [obj, ...oldtaskData]
-    
-       setOldTaskData(copyData)
-        setInputValue("")
-        
-      // Handle form submission logic here
-    };
+    let copyData = [obj, ...oldtaskData]
+
+    setOldTaskData(copyData)
+    setInputValue("")
+
+    // Handle form submission logic here
+  };
 
   return (
     <>    <div className={`md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg  ${shake ? 'animate-shake border border-red-500' : ''} shadow-lg mx-auto`}>
       <form action="" className="flex justify-between items-center" onSubmit={handleSubmit}>
-        <input type="text" name="taskInput" placeholder="Add task"  value={inputValue}
-        className={` p-1 font-smaller md:w-[50vw] outline-none bg-white style-none `}
-        onChange={(e) => {
-          setInputValue(e.target.value.trimStart())
-        
+        <input type="text" name="taskInput" placeholder="Add task" value={inputValue}
+          className={` p-1 font-smaller md:w-[50vw] outline-none bg-white style-none `}
+          onChange={(e) => {
+            setInputValue(e.target.value.trimStart())
 
 
-        }} 
+
+          }}
         />
         <button type="submit" className="mr-1 p-2 bg-sky-500 w-10 h-10 group relative flex items-center justify-center  rounded-full hover:cursor-pointer hover:bg-sky-600 transition duration-300 ease-in-out">
           <img src={send}

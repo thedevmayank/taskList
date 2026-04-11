@@ -2,8 +2,10 @@ import { PANELS } from "./constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import PlannedPanel from "../taskBarPanel/PlannedPanel"
+import AllPanel from "../taskBarPanel/AllPanel";
 
-export default function TaskBar({ taskBar, setTaskBar, activePanel }) {
+
+export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTaskItem, setSelectedTaskItem }) {
  
   let btnValue = () =>{
 
@@ -21,7 +23,7 @@ export default function TaskBar({ taskBar, setTaskBar, activePanel }) {
       </div>
 
       <div className="p-4">
-        {activePanel === PANELS.ALL && <button onClick={btnValue}>click here to approve</button>}
+        {activePanel === PANELS.ALL && <AllPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} />}
 
         {activePanel === PANELS.PLANNED && <PlannedPanel />}
         {activePanel === PANELS.FOCUSED && <p>Focused Tasks Content</p>}
