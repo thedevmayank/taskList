@@ -156,7 +156,7 @@ export default function All() {
                   setDeleteModal(false)
                 }}  >
                   Cancel</button>
-                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={(index) => {
+                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={() => {
                   setDeleteModal(false)
                   const updated = oldtaskData.filter(t => t.id !== selectedTaskId);
                   setOldTaskData(updated);

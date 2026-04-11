@@ -67,7 +67,9 @@ rounded-lg mt-5 shadow-lg'>
       taskBar={taskBar}
       setTaskBar={setTaskBar}
       activePanel={activePanel}
+      selectedTaskItem={selectedTaskItem}
       setSelectedTaskItem={setSelectedTaskItem}
+
      
     />
   </div>
