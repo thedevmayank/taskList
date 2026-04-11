@@ -6,11 +6,21 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
+
 function App() {
   const [taskBar, setTaskBar] = useState(false);
   const [activePanel, setActivePanel] = useState("");
   const [mobileMenu, setMobileMenu] = useState(false);
   const [selectedTaskItem, setSelectedTaskItem] = useState(null);
+  const [oldtaskData, setOldTaskData] = useState(() => {
+    try {
+      const data = localStorage.getItem("tasks");
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
+  });
+ 
 
   
   return (
@@ -29,7 +39,7 @@ rounded-lg mt-5 shadow-lg'>
   {/* Main Content */}
   <div className='relative overflow-hidden md:rounded-tr-lg md:rounded-br-lg shadow-md   duration-300 ease-in-out'>
     
-    <Outlet context={{ setTaskBar, setActivePanel, setSelectedTaskItem }} />
+    <Outlet context={{ setTaskBar, setActivePanel, setSelectedTaskItem, oldtaskData, setOldTaskData }} />
 
     <TaskBar
       taskBar={taskBar}
@@ -37,6 +47,12 @@ rounded-lg mt-5 shadow-lg'>
       activePanel={activePanel}
       selectedTaskItem={selectedTaskItem}
       setSelectedTaskItem={setSelectedTaskItem}
+       oldtaskData={oldtaskData}
+        setOldTaskData={setOldTaskData}
+      
+      
+    
+
     />
   </div>
 
@@ -61,15 +77,17 @@ rounded-lg mt-5 shadow-lg'>
   {/* Main Content */}
   <div className='relative flex overflow-hidden '>
     
-    <Outlet context={{ setTaskBar, setActivePanel, setSelectedTaskItem }} />
+    <Outlet context={{ setTaskBar, setActivePanel, setSelectedTaskItem, oldtaskData, setOldTaskData }} />
 
     <TaskBar
       taskBar={taskBar}
       setTaskBar={setTaskBar}
       activePanel={activePanel}
-      selectedTaskItem={selectedTaskItem}
       setSelectedTaskItem={setSelectedTaskItem}
-
+        selectedTaskItem={selectedTaskItem}
+        oldtaskData={oldtaskData}
+        setOldTaskData={setOldTaskData}
+      
      
     />
   </div>

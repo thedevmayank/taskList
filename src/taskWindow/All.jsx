@@ -14,7 +14,7 @@ import send_fill from "../assets/send_fill.svg"
 import { useEffect, useState } from "react";
 
 export default function All() {
-  const { setTaskBar, setActivePanel , setSelectedTaskItem } = useOutletContext();
+  const { setTaskBar, setActivePanel , setSelectedTaskItem, oldtaskData, setOldTaskData } = useOutletContext();
   const [activeEditPanel, setActiveEditPanel] = useState(false);
   const [closeIcon, setCloseIcon] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false)
@@ -42,14 +42,14 @@ export default function All() {
       "bg-gradient-to-r from-[#cfd9df] to-[#e2ebf0]"
 
     ]
-  const [oldtaskData, setOldTaskData] = useState(() => {
-    try {
-      const data = localStorage.getItem("tasks");
-      return data ? JSON.parse(data) : [];
-    } catch {
-      return [];
-    }
-  });
+  // const [oldtaskData, setOldTaskData] = useState(() => {
+  //   try {
+  //     const data = localStorage.getItem("tasks");
+  //     return data ? JSON.parse(data) : [];
+  //   } catch {
+  //     return [];
+  //   }
+  // });
 
 
   useEffect(() => {
@@ -156,7 +156,7 @@ export default function All() {
                   setDeleteModal(false)
                 }}  >
                   Cancel</button>
-                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={() => {
+                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={(index) => {
                   setDeleteModal(false)
                   const updated = oldtaskData.filter(t => t.id !== selectedTaskId);
                   setOldTaskData(updated);

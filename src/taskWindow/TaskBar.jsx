@@ -5,12 +5,9 @@ import PlannedPanel from "../taskBarPanel/PlannedPanel"
 import AllPanel from "../taskBarPanel/AllPanel";
 
 
-export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTaskItem, setSelectedTaskItem }) {
+export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTaskItem, setSelectedTaskItem, oldtaskData, setOldTaskData }) {
  
-  let btnValue = () =>{
-
-    alert("Task Approved")
-  }
+ 
   return (
     <div
       className={` absolute top-0 z-1000 right-0 h-full w-[100vw] md:w-[21vw] bg-white shadow-lg 
@@ -23,9 +20,9 @@ export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTask
       </div>
 
       <div className="p-4">
-        {activePanel === PANELS.ALL && <AllPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} />}
+        {activePanel === PANELS.ALL && <AllPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
 
-        {activePanel === PANELS.PLANNED && <PlannedPanel />}
+        {activePanel === PANELS.PLANNED && <PlannedPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
         {activePanel === PANELS.FOCUSED && <p>Focused Tasks Content</p>}
         {activePanel === PANELS.TASKS && <p>Tasks List Content</p>}
       </div>
