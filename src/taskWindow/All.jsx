@@ -68,8 +68,8 @@ export default function All() {
 
     <>
 
-      <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-screen ${theme}   px-4  `}>
-        <div className="md:w-[75%] w-[100%] text-black  mt-5 md:mt-0 flex justify-between items-center h-[13vh] px-4  py-4">
+      <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-screen ${theme} flex flex-col flex-between   px-4  `}>
+        <div className="md:w-[75%] w-[100%] text-black  mt-5 md:mt-0 flex justify-between items-center px-4  py-4">
           <p className="md:text-[20px]   text-[16px] font-bold flex gap-3 items-center">
             <img src={AllPic} alt="" width="30" height="30" className="hidden md:block  " />  ALL TASKS</p>
           <FontAwesomeIcon icon={closeIcon ? faTimes : faEllipsis} onClick={() => {
@@ -84,7 +84,7 @@ export default function All() {
         {/* tasks */}
 
 
-        <div className=" w-[90vw] md:w-[60vw] mt-3  h-[76%]  overflow-y-auto [scrollbar-width:none] flex flex-col md:p-1  gap-4 ">
+        <div className=" w-[90vw] md:w-[60vw] mt-3  flex-1   overflow-y-auto [scrollbar-width:none] flex flex-col md:p-1  gap-4 ">
 
          
           {
@@ -94,6 +94,7 @@ export default function All() {
                 return (
 
                   <>
+          
                    <div className={`bg-white w-[100%]   backdrop-blur-lg flex  gap-2 justify-between  py-4 px-3 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
                   hover:scale-[1.01] hover:shadow-lg ${task.id === newTaskId
                       ? "translate-y-115 opacity-0 animate-slideUp rotate-18"
@@ -127,6 +128,8 @@ export default function All() {
                     }} />
 
                   </div>
+                 
+          
                   </>
                  
                 )
@@ -168,7 +171,10 @@ export default function All() {
           </div>
 
         </div>
+        <div className=" mb-12  ">
+                 <TaskInput inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setNewTaskId={setNewTaskId} />
 
+                </div>
 
         {/* theme panel */}
         <div className={` hidden md:block md:w-[18vw] fixed  right-[4vw] z-990 bg-white backdrop-blur-lg p-6 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'top-[9%] opacity-100 visible ' : 'top-[3%] invisible opacity-0'}
@@ -245,10 +251,7 @@ export default function All() {
           setCloseIcon(!closeIcon)
         }}></div>
 
-        <div className="fixed bottom-7 md:bottom-14   ">
-          <TaskInput inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setNewTaskId={setNewTaskId} />
-
-        </div>
+        
 
 
 
