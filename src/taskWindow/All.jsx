@@ -69,15 +69,15 @@ export default function All() {
     <>
 
       <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-screen ${theme}   px-4  `}>
-        <div className="md:w-[75%] w-[100%] text-black flex justify-between items-center h-[13vh] px-4   py-2">
-          <p className="md:text-[20px] text-[16px] font-bold flex gap-3 items-center">
+        <div className="md:w-[75%] w-[100%] text-black flex justify-between items-center h-[13vh] px-4  py-4">
+          <p className="md:text-[20px] border mt-6 md:mt-0 text-[16px] font-bold flex gap-3 items-center">
             <img src={AllPic} alt="" width="30" height="30" className="hidden md:block  " />  ALL TASKS</p>
           <FontAwesomeIcon icon={closeIcon ? faTimes : faEllipsis} onClick={() => {
             setActiveEditPanel(!activeEditPanel)
             setCloseIcon(!closeIcon)
             setActiveItem(!activeItem)
           }
-          } className="cursor-pointer bg-white py-1 px-1  rounded-md transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
+          } className="cursor-pointer bg-white mt-5 text-sm rounded-sm px-1 py-1 transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
         </div>
 
 

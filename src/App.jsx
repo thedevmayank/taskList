@@ -26,8 +26,8 @@ function App() {
   return (
 
     <>
-       <main className={`bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] h-[100vh]  `}>
-    <div className='max-w-full h-[97%] mx-auto 
+       <main className={`bg-[f5f5f5] w-[100%] h-[100vh] md:p-3  `}>
+    <div className='max-w-[98vw] h-[97%] mx-auto 
 hidden md:grid md:grid-cols-[15%_auto] 
 rounded-lg shadow-lg'>
 
@@ -65,7 +65,7 @@ rounded-lg shadow-lg'>
 
   {/* Sidebar */}
 
-  <FontAwesomeIcon icon={faBars} className="fixed z-99 top-[3.3%] left-[5%]" onClick={() =>{setMobileMenu(!mobileMenu)}}/>
+  <FontAwesomeIcon icon={faBars} className="fixed z-99 top-[2.7%] left-[5%]" onClick={() =>{setMobileMenu(!mobileMenu)}}/>
  
   <div className={`fixed transition-transform bg-[white]  z-1002 duration-300 md:hidden ease-in-out h-[100dvh] w-[55vw] ${mobileMenu ? 'translate-x-0' : '-translate-x-full'}`}>
     <Layout taskBar={taskBar} setTaskBar={setTaskBar}/>
