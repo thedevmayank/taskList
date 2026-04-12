@@ -286,28 +286,28 @@ export default function All() {
 
         </div>
         <ul className="text-[14px] ">
-          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group   hover:text-green-500 cursor-pointer" >
-            <span onClick={() => {
+          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group   hover:text-green-500 cursor-pointer" onClick={() => {
                 const filteredTasks = oldtaskData.filter(task => !task.status);
                 setOldTaskData(filteredTasks);
                 setActiveEditPanel(false)
                 setCloseIcon(false)
                 setActiveItem(false)
-              }}>mark as complete</span>
+              }} >
+            <span >mark as complete</span>
 
             <FontAwesomeIcon
               icon={faCircleCheck}
               className="text-green-500 text-[14px]  mr-4  "
             />
           </li>
-          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer" >
-            <span onClick={() => {
+          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer" onClick={() => {
                 const filteredTasks = oldtaskData.filter(task => !task.status);
                 setOldTaskData(filteredTasks);
                 setActiveEditPanel(false)
                 setCloseIcon(false)
                 setActiveItem(false)
-              }}>delete task</span>
+              }} >
+            <span>delete task</span>
 
             <FontAwesomeIcon
               icon={faTrashCan}
@@ -315,13 +315,13 @@ export default function All() {
               className="text-orange-500 text-[14px]  mr-4   "
             />
           </li>
-          <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center  cursor-pointer" >
-            <span onClick={() => {
-              setOldTaskData([])
-              setActiveEditPanel(false)
-              setCloseIcon(false)
-              setActiveItem(false)
-              }}>delete all tasks</span>
+          <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center  cursor-pointer" onClick={() => {
+            setOldTaskData([])
+            setActiveEditPanel(false)
+            setCloseIcon(false)
+            setActiveItem(false)
+          }}>
+            <span >delete all tasks</span>
 
             <FontAwesomeIcon
               icon={faBroom}

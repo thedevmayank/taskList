@@ -37,7 +37,7 @@ export default function AllPanel({
 
   return (
     <>
-    <main className=' max-w-full   flex flex-col border flex-wrap gap-26  justify-between'>
+    <main className=' max-w-full   flex flex-col border flex-wrap gap-29 md:gap-48  justify-between'>
       <div className=' flex flex-col gap-3 outline-none'>
         {selectedTaskItem ? (
           <>
@@ -98,7 +98,7 @@ export default function AllPanel({
           <p>No task selected</p>
         )}
       </div>
-     <p className='uppercase text-center text-sm text-gray-500'>🧠 Clear mind. Clear tasks.</p>
+     <p className='uppercase text-center text-sm text-gray-400 font-semibold'>🧠 Clear mind. Clear tasks.</p>
       
       </main>
     </>
