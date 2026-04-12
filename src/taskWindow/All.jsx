@@ -69,7 +69,7 @@ export default function All() {
     <>
 
       <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-[100dvh] ${theme}  flex flex-col justify-between   px-4  `}>
-        <div className="md:w-[75%] w-[100%] text-black  mt-5 md:mt-0 flex justify-between items-center px-4  py-4">
+        <div className="md:w-[75%] w-[100%] text-black  mt-7 md:mt-0 flex justify-between items-center px-4  py-4">
           <p className="md:text-[20px]   text-[16px] font-bold flex gap-3 items-center">
             <img src={AllPic} alt="" width="30" height="30" className="hidden md:block  " />  ALL TASKS</p>
           <FontAwesomeIcon icon={closeIcon ? faTimes : faEllipsis} onClick={() => {
@@ -171,7 +171,7 @@ export default function All() {
           </div>
 
         </div>
-        <div className=" mb-12  ">
+        <div className=" mb-5 md:mb-14  ">
                  <TaskInput inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setNewTaskId={setNewTaskId} />
 
                 </div>
@@ -373,7 +373,7 @@ function TaskInput({ inputValue, setInputValue, oldtaskData, setOldTaskData, set
   };
 
   return (
-    <>    <div className={`md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg  ${shake ? 'animate-shake border border-red-500' : ''} shadow-lg mx-auto`}>
+    <>    <div className={`md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg  ${shake ? 'animate-shake border border-red-500' : ''} shadow-lg `}>
       <form action="" className="flex justify-between items-center" onSubmit={handleSubmit}>
         <input type="text" name="taskInput" placeholder="Add task" value={inputValue}
           className={` p-1 font-smaller md:w-[50vw] outline-none bg-white style-none `}

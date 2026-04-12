@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import focusTaskImage from "../assets/One_task_at_a_time_doodle-removebg-preview.png"
 
 export default function AllPanel({ 
   selectedTaskItem, 
@@ -36,7 +37,7 @@ export default function AllPanel({
 
   return (
     <>
-    <main className=' max-w-full   flex flex-col gap-18   justify-between'>
+    <main className=' max-w-full   flex flex-col border flex-wrap gap-26  justify-between'>
       <div className=' flex flex-col gap-3 outline-none'>
         {selectedTaskItem ? (
           <>
@@ -50,7 +51,7 @@ export default function AllPanel({
               value={editTaskName}
               onChange={(e) => setEditTaskName(e.target.value)}
               height={200}
-              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none resize-none bg-[#FAF9F6] "
+              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none resize-none bg-gray-100 "
               placeholder="Edit task name"
             />
         </div>
@@ -59,7 +60,7 @@ export default function AllPanel({
             <textarea
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
-              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none  resize-none bg-[#FAF9F6] "
+              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none  resize-none bg-gray-100 "
               placeholder="Write notes..."
             />
 
@@ -97,7 +98,7 @@ export default function AllPanel({
           <p>No task selected</p>
         )}
       </div>
-
+     <p className='uppercase text-center text-sm text-gray-500'>🧠 Clear mind. Clear tasks.</p>
       
       </main>
     </>

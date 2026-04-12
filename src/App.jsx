@@ -33,7 +33,7 @@ rounded-lg shadow-lg'>
 
   {/* Sidebar */}
   <div className='md:block md:rounded-tl-lg md:rounded-bl-lg bg-[white] shadow-md '>
-    <Layout taskBar={taskBar} setTaskBar={setTaskBar} />
+    <Layout taskBar={taskBar} setTaskBar={setTaskBar} oldtaskData={oldtaskData} setMobileMenu={setMobileMenu} />
   </div>
 
   {/* Main Content */}
@@ -68,7 +68,7 @@ rounded-lg shadow-lg'>
   <FontAwesomeIcon icon={faBars} className="fixed z-99 top-[2.7%] left-[5%]" onClick={() =>{setMobileMenu(!mobileMenu)}}/>
  
   <div className={`fixed transition-transform bg-[white]  z-1002 duration-300 md:hidden ease-in-out h-[100dvh] w-[55vw] ${mobileMenu ? 'translate-x-0' : '-translate-x-full'}`}>
-    <Layout taskBar={taskBar} setTaskBar={setTaskBar}/>
+    <Layout taskBar={taskBar} setTaskBar={setTaskBar} oldtaskData={oldtaskData} setMobileMenu={setMobileMenu} />
      
      
   
