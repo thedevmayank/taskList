@@ -239,7 +239,7 @@ export default function All() {
 
           </ul>
         </div>
-        <div className={`w-[100vw] h-[100vh] fixed  inset-0  z-99 ${activeItem ? 'block' : 'hidden'}`} onClick={() => {
+        <div className={`w-[100%] h-[100%] fixed  inset-0  z-99 ${activeItem ? 'block' : 'hidden'}`} onClick={() => {
           setActiveItem(!activeItem)
           setActiveEditPanel(false)
           setCloseIcon(!closeIcon)

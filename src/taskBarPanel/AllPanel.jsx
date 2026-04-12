@@ -52,7 +52,7 @@ export default function AllPanel({
               placeholder="Edit task name"
             />
         </div>
-            {/* Textarea */}
+            {/* Textarea */}  
             <textarea
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}

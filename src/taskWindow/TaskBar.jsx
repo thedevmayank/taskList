@@ -10,7 +10,7 @@ export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTask
  
   return (
     <div
-      className={` absolute top-0 z-1000 right-0 h-full w-[100vw] md:w-[21vw] bg-white shadow-lg 
+      className={` absolute top-0 z-1000 right-0 min-h-screen w-[100vw] md:w-[21vw] bg-white shadow-lg 
       transition-transform duration-300 ease-in-out
       ${taskBar ? "translate-x-0" : "translate-x-full"}`}
     >
@@ -19,7 +19,7 @@ export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTask
         <button onClick={() => setTaskBar(false)}><FontAwesomeIcon icon={faTimes} /></button>
       </div>
 
-      <div className="p-4 h-[87vh] md:h-[80vh] lg:h-[82vh] ">
+      <div className="p-4 h-[70dvh] ">
         {activePanel === PANELS.ALL && <AllPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
 
         {activePanel === PANELS.PLANNED && <PlannedPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}

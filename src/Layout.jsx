@@ -17,7 +17,7 @@ const [activeItem, setActiveItem] = useState("");
     <>
     {/* for desktop */}
 
-    <div className='w-[100%] h-[100%] px-2 py-2  capitalize  '>
+    <div className='w-[100%] h-full  px-2 py-2  capitalize  '>
         <div className='flex justify-between items-center h-[20px] mt-3'>
         <figure>
           <Link to="/" onClick={() => setTaskBar(false)}>
