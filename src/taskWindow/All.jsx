@@ -69,22 +69,22 @@ export default function All() {
     <>
 
       <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-screen ${theme}   px-4  `}>
-        <div className="md:w-[75%] w-[100%] text-black flex justify-between items-center h-[13vh] px-4  py-4">
-          <p className="md:text-[20px] border mt-6 md:mt-0 text-[16px] font-bold flex gap-3 items-center">
+        <div className="md:w-[75%] w-[100%] text-black  mt-5 md:mt-0 flex justify-between items-center h-[13vh] px-4  py-4">
+          <p className="md:text-[20px]   text-[16px] font-bold flex gap-3 items-center">
             <img src={AllPic} alt="" width="30" height="30" className="hidden md:block  " />  ALL TASKS</p>
           <FontAwesomeIcon icon={closeIcon ? faTimes : faEllipsis} onClick={() => {
             setActiveEditPanel(!activeEditPanel)
             setCloseIcon(!closeIcon)
             setActiveItem(!activeItem)
           }
-          } className="cursor-pointer bg-white mt-5 text-sm rounded-sm px-1 py-1 transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
+          } className="cursor-pointer bg-white text-sm md:text-[18px] rounded-sm px-1 py-1 transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
         </div>
 
 
         {/* tasks */}
 
 
-        <div className=" md:w-[60vw] h-[76%]     overflow-y-auto [scrollbar-width:none] flex flex-col   gap-4 p-3">
+        <div className=" w-[90vw] md:w-[60vw] mt-3  h-[76%]  overflow-y-auto [scrollbar-width:none] flex flex-col md:p-1  gap-4 ">
 
          
           {
@@ -95,7 +95,7 @@ export default function All() {
 
                   <>
                    <div className={`bg-white w-[100%]   backdrop-blur-lg flex  gap-2 justify-between  py-4 px-3 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
-                  hover:-translate-y-1 hover:scale-101 hover:shadow-lg ${task.id === newTaskId
+                  hover:scale-[1.01] hover:shadow-lg ${task.id === newTaskId
                       ? "translate-y-115 opacity-0 animate-slideUp rotate-18"
                       : "translate-y-0 opacity-100 rotate-0"}
                       `} onClick={() => setSelectedTaskItem(task)}>
@@ -156,7 +156,7 @@ export default function All() {
                   setDeleteModal(false)
                 }}  >
                   Cancel</button>
-                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={(index) => {
+                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={() => {
                   setDeleteModal(false)
                   const updated = oldtaskData.filter(t => t.id !== selectedTaskId);
                   setOldTaskData(updated);
@@ -284,7 +284,13 @@ export default function All() {
         </div>
         <ul className="text-[14px] ">
           <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group   hover:text-green-500 cursor-pointer" >
-            <span className=" ">mark as complete</span>
+            <span onClick={() => {
+                const filteredTasks = oldtaskData.filter(task => !task.status);
+                setOldTaskData(filteredTasks);
+                setActiveEditPanel(false)
+                setCloseIcon(false)
+                setActiveItem(false)
+              }}>mark as complete</span>
 
             <FontAwesomeIcon
               icon={faCircleCheck}
@@ -292,7 +298,13 @@ export default function All() {
             />
           </li>
           <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer" >
-            <span className=" ">delete task</span>
+            <span onClick={() => {
+                const filteredTasks = oldtaskData.filter(task => !task.status);
+                setOldTaskData(filteredTasks);
+                setActiveEditPanel(false)
+                setCloseIcon(false)
+                setActiveItem(false)
+              }}>delete task</span>
 
             <FontAwesomeIcon
               icon={faTrashCan}
@@ -301,7 +313,12 @@ export default function All() {
             />
           </li>
           <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center  cursor-pointer" >
-            <span className=" ">delete all tasks</span>
+            <span onClick={() => {
+              setOldTaskData([])
+              setActiveEditPanel(false)
+              setCloseIcon(false)
+              setActiveItem(false)
+              }}>delete all tasks</span>
 
             <FontAwesomeIcon
               icon={faBroom}

@@ -19,7 +19,7 @@ export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTask
         <button onClick={() => setTaskBar(false)}><FontAwesomeIcon icon={faTimes} /></button>
       </div>
 
-      <div className="p-4 h-[70dvh] ">
+      <div className="p-3  ">
         {activePanel === PANELS.ALL && <AllPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
 
         {activePanel === PANELS.PLANNED && <PlannedPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}

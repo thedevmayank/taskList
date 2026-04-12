@@ -36,46 +36,43 @@ export default function AllPanel({
 
   return (
     <>
-    <main className='border max-w-full h-[100%] bg-sky-200 flex flex-col justify-between'>
-      <div className='border'>
+    <main className=' max-w-full   flex flex-col gap-18   justify-between'>
+      <div className=' flex flex-col gap-3 outline-none'>
         {selectedTaskItem ? (
           <>
-          <div>
-            <h2>Editing Task</h2>
+          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-3'>
+     
 
             {/*  Input */}
-            <input
-              type="text"
+            <textarea
+              
               value={editTaskName}
               onChange={(e) => setEditTaskName(e.target.value)}
-              className="border p-2 rounded w-full mb-2"
+              height={200}
+              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none resize-none bg-[#FAF9F6] "
               placeholder="Edit task name"
             />
         </div>
+         
             {/* Textarea */}  
             <textarea
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
-              className="border p-2 rounded w-full mb-2 resize-none"
+              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none  resize-none bg-[#FAF9F6] "
               placeholder="Write notes..."
             />
 
-          
+          </div>
 
             {/* ✅ Save Button */}
             <button
               onClick={handleSave}
-              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mr-2"
+              className="px-4 py-2 bg-sky-500  w-full  text-white rounded  hover:bg-green-400 mr-2"
             >
               Save
             </button>
-          </>
-        ) : (
-          <p>No task selected</p>
-        )}
-      </div>
-
-      <div>
+            <div>
         {selectedTaskItem && (
           <button
             onClick={() => {
@@ -89,12 +86,19 @@ export default function AllPanel({
               setSelectedTaskItem(null);}
               setTaskBar(false);
             }}
-            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mt-2"
+            className="px-4 py-2 bg-red-500 text-white w-full rounded hover:bg-red-600 mt-2"
           >
             Delete Task
           </button>
         )}
       </div>
+          </>
+        ) : (
+          <p>No task selected</p>
+        )}
+      </div>
+
+      
       </main>
     </>
   );
