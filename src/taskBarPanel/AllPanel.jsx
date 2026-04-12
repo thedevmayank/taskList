@@ -36,9 +36,11 @@ export default function AllPanel({
 
   return (
     <>
-      <div>
+    <main className='border max-w-full h-[100%] bg-sky-200 flex flex-col justify-between'>
+      <div className='border'>
         {selectedTaskItem ? (
           <>
+          <div>
             <h2>Editing Task</h2>
 
             {/*  Input */}
@@ -49,12 +51,12 @@ export default function AllPanel({
               className="border p-2 rounded w-full mb-2"
               placeholder="Edit task name"
             />
-
-            {/* ✅ Textarea */}
+        </div>
+            {/* Textarea */}
             <textarea
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
-              className="border p-2 rounded w-full mb-2"
+              className="border p-2 rounded w-full mb-2 resize-none"
               placeholder="Write notes..."
             />
 
@@ -93,6 +95,7 @@ export default function AllPanel({
           </button>
         )}
       </div>
+      </main>
     </>
   );
 }

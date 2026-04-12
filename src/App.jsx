@@ -27,7 +27,7 @@ function App() {
 
     <>
        
-    <div className='max-w-[98vw] h-[93vh] mx-auto 
+    <div className='max-w-[98vw] h-[94vh] mx-auto 
 hidden md:grid md:grid-cols-[15%_auto] 
 rounded-lg mt-5 shadow-lg'>
 
