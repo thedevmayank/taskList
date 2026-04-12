@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import PlannedPanel from "../taskBarPanel/PlannedPanel"
 import AllPanel from "../taskBarPanel/AllPanel";
+import FocusedPanel from "../taskBarPanel/FocusedPanel";
+import TasksPanel from "../taskBarPanel/TasksPanel";
 
 
 export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTaskItem, setSelectedTaskItem, oldtaskData, setOldTaskData }) {
@@ -23,8 +25,8 @@ export default function TaskBar({ taskBar, setTaskBar, activePanel, selectedTask
         {activePanel === PANELS.ALL && <AllPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
 
         {activePanel === PANELS.PLANNED && <PlannedPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
-        {activePanel === PANELS.FOCUSED && <p>Focused Tasks Content</p>}
-        {activePanel === PANELS.TASKS && <p>Tasks List Content</p>}
+        {activePanel === PANELS.FOCUSED && <FocusedPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
+        {activePanel === PANELS.TASKS && <TasksPanel selectedTaskItem={selectedTaskItem} setSelectedTaskItem={setSelectedTaskItem} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setTaskBar={setTaskBar} />}
       </div>
     </div>
   );

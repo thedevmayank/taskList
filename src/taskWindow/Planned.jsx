@@ -50,7 +50,9 @@ export default function Planned() {
   //     return [];
   //   }
   // });
-
+const plannedTasks = oldtaskData.filter(
+  task => task.taskType === "PLANNED"
+);
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -68,34 +70,35 @@ export default function Planned() {
 
     <>
 
-      <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] h-[100%] ${theme}   px-4 overflow-hidden `}>
-        <div className="md:w-[75%] w-[100%] text-black flex justify-between items-center h-[13vh] px-4   py-2">
-          <p className="md:text-[20px] text-[16px] font-bold flex gap-3 items-center">
+      <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-[100dvh] ${theme}  flex flex-col justify-between   px-4  `}>
+        <div className="md:w-[75%] w-[100%] text-black  mt-7 md:mt-0 flex justify-between items-center px-4  py-4">
+          <p className="md:text-[20px]   text-[16px] font-bold flex gap-3 items-center">
             <img src={AllPic} alt="" width="30" height="30" className="hidden md:block  " />  PLANNED TASKS</p>
           <FontAwesomeIcon icon={closeIcon ? faTimes : faEllipsis} onClick={() => {
             setActiveEditPanel(!activeEditPanel)
             setCloseIcon(!closeIcon)
             setActiveItem(!activeItem)
           }
-          } className="cursor-pointer bg-white py-1 px-1  rounded-md transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
+          } className="cursor-pointer bg-white text-sm md:text-[18px] rounded-sm px-1 py-1 transition  duration-300 ease-in-out hover:bg-gradient-to-r from-sky-300 to-blue-400 hover:text-white z-991" />
         </div>
 
 
         {/* tasks */}
 
 
-        <div className=" md:w-[60vw] h-[76%]     overflow-y-auto [scrollbar-width:none] flex flex-col   gap-4 p-3">
+        <div className=" w-[90vw] md:w-[60vw] mt-3  flex-1    overflow-y-auto [scrollbar-width:none] flex flex-col md:p-1  gap-4 ">
 
          
           {
-            oldtaskData.length >= 1
+            plannedTasks.length >= 1
               ?
-              oldtaskData.map((task) => {
+              plannedTasks.map((task) => {
                 return (
 
                   <>
-                   <div className={`bg-white w-[100%]   backdrop-blur-lg flex  gap-2 justify-between  py-4 px-3 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
-                  hover:-translate-y-1 hover:scale-101 hover:shadow-lg ${task.id === newTaskId
+          
+                   <div className={`bg-white w-[100%]    backdrop-blur-lg flex  gap-2 justify-between  py-4 px-3 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
+                  hover:scale-[1.01] hover:shadow-lg ${task.id === newTaskId
                       ? "translate-y-115 opacity-0 animate-slideUp rotate-18"
                       : "translate-y-0 opacity-100 rotate-0"}
                       `} onClick={() => setSelectedTaskItem(task)}>
@@ -109,7 +112,7 @@ export default function Planned() {
                         });
                         setOldTaskData(updatedData);
                       }} />
-                    <p className="bg-white w-full"
+                    <p className="bg-white w-full capitalize "
                       onClick={() => {
                         setTaskBar(true);
                         setActivePanel(PANELS.PLANNED);
@@ -127,6 +130,8 @@ export default function Planned() {
                     }} />
 
                   </div>
+                 
+          
                   </>
                  
                 )
@@ -134,9 +139,9 @@ export default function Planned() {
 
               
               :
-              <div className="max-w-[50%]  mt-7 mx-auto ">
-                <img src={noAllTaskImage} width="300" height="300" alt="No tasks available" />
-              </div>
+               <div className="flex justify-center items-center h-full ">
+                              <img src={noAllTaskImage} width="200" height="200" alt="No tasks available" />
+                            </div>
           }
 
 
@@ -156,7 +161,7 @@ export default function Planned() {
                   setDeleteModal(false)
                 }}  >
                   Cancel</button>
-                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={(index) => {
+                <button className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600  hover:text-white" onClick={() => {
                   setDeleteModal(false)
                   const updated = oldtaskData.filter(t => t.id !== selectedTaskId);
                   setOldTaskData(updated);
@@ -168,10 +173,13 @@ export default function Planned() {
           </div>
 
         </div>
+        <div className=" mb-5 md:mb-14  ">
+                 <TaskInput inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setNewTaskId={setNewTaskId} />
 
+                </div>
 
         {/* theme panel */}
-        <div className={` hidden md:block md:w-[18vw] fixed  right-[4vw] z-990 bg-white backdrop-blur-lg p-6 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'top-[9%] opacity-100 visible ' : 'top-[3%] invisible opacity-0'}
+        <div className={` hidden md:block md:w-[18vw] fixed capitalize  right-[4vw] z-990 bg-white backdrop-blur-lg p-6 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'top-[9%] opacity-100 visible ' : 'top-[3%] invisible opacity-0'}
         `} >
 
           <p className="text-[14px] font-bold mb-4">Change Theme</p>
@@ -239,16 +247,13 @@ export default function Planned() {
 
           </ul>
         </div>
-        <div className={`w-[100vw] h-[100vh] fixed  inset-0  z-99 ${activeItem ? 'block' : 'hidden'}`} onClick={() => {
+        <div className={`w-[100%] h-[100%] fixed  inset-0  z-99 ${activeItem ? 'block' : 'hidden'}`} onClick={() => {
           setActiveItem(!activeItem)
           setActiveEditPanel(false)
           setCloseIcon(!closeIcon)
         }}></div>
 
-        <div className="fixed bottom-7 md:bottom-14   ">
-          <TaskInput inputValue={inputValue} setInputValue={setInputValue} oldtaskData={oldtaskData} setOldTaskData={setOldTaskData} setNewTaskId={setNewTaskId} />
-
-        </div>
+        
 
 
 
@@ -262,7 +267,7 @@ export default function Planned() {
 
       {/* for mobile theme panel */}
 
-      <div className={` md:hidden w-[80vw] fixed   left-[10vw] z-999 bg-white backdrop-blur-lg p-5 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'bottom-[5%] opacity-100 visible' : 'bottom-[-1%] invisible opacity-0'}`} >
+      <div className={` md:hidden w-[80vw] fixed capitalize  left-[10vw] z-999 bg-white backdrop-blur-lg p-5 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'bottom-[5%] opacity-100 visible' : 'bottom-[-1%] invisible opacity-0'}`} >
 
         <p className="text-[15px]  mb-4"> Theme</p>
 
@@ -283,16 +288,28 @@ export default function Planned() {
 
         </div>
         <ul className="text-[14px] ">
-          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group   hover:text-green-500 cursor-pointer" >
-            <span className=" ">mark as complete</span>
+          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group   hover:text-green-500 cursor-pointer" onClick={() => {
+                const filteredTasks = oldtaskData.filter(task => !task.status);
+                setOldTaskData(filteredTasks);
+                setActiveEditPanel(false)
+                setCloseIcon(false)
+                setActiveItem(false)
+              }} >
+            <span >mark as complete</span>
 
             <FontAwesomeIcon
               icon={faCircleCheck}
               className="text-green-500 text-[14px]  mr-4  "
             />
           </li>
-          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer" >
-            <span className=" ">delete task</span>
+          <li className="border-b border-gray-300 pb-2 mb-3 transition duration-300 ease-in-out flex justify-between items-center group  hover:text-orange-500 cursor-pointer" onClick={() => {
+                const filteredTasks = oldtaskData.filter(task => !task.status);
+                setOldTaskData(filteredTasks);
+                setActiveEditPanel(false)
+                setCloseIcon(false)
+                setActiveItem(false)
+              }} >
+            <span>delete task</span>
 
             <FontAwesomeIcon
               icon={faTrashCan}
@@ -300,8 +317,13 @@ export default function Planned() {
               className="text-orange-500 text-[14px]  mr-4   "
             />
           </li>
-          <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center  cursor-pointer" >
-            <span className=" ">delete all tasks</span>
+          <li className="border-b border-gray-300 pb-2 transition duration-300 ease-in-out flex justify-between items-center  cursor-pointer" onClick={() => {
+            setOldTaskData([])
+            setActiveEditPanel(false)
+            setCloseIcon(false)
+            setActiveItem(false)
+          }}>
+            <span >delete all tasks</span>
 
             <FontAwesomeIcon
               icon={faBroom}
@@ -340,7 +362,8 @@ function TaskInput({ inputValue, setInputValue, oldtaskData, setOldTaskData, set
     let obj = {
       taskName: inputValue,
       status: false,
-      id: Date.now()
+      id: Date.now(),
+      taskType: "PLANNED"
     }
 
     setNewTaskId(obj.id)
@@ -353,7 +376,7 @@ function TaskInput({ inputValue, setInputValue, oldtaskData, setOldTaskData, set
   };
 
   return (
-    <>    <div className={`md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg  ${shake ? 'animate-shake border border-red-500' : ''} shadow-lg mx-auto`}>
+    <>    <div className={`md:w-[60vw] w-[90vw]  bg-[white]  p-2 rounded-lg  ${shake ? 'animate-shake border border-red-500' : ''} shadow-lg `}>
       <form action="" className="flex justify-between items-center" onSubmit={handleSubmit}>
         <input type="text" name="taskInput" placeholder="Add task" value={inputValue}
           className={` p-1 font-smaller md:w-[50vw] outline-none bg-white style-none `}

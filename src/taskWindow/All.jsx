@@ -84,9 +84,9 @@ export default function All() {
         {/* tasks */}
 
 
-        <div className=" w-[90vw] md:w-[60vw] mt-3  flex-1   overflow-y-auto [scrollbar-width:none] flex flex-col md:p-1  gap-4 ">
+        <div className=" w-[90vw] md:w-[60vw] mt-3  flex-1    overflow-y-auto [scrollbar-width:none] flex flex-col md:p-1  gap-4 ">
 
-         
+     
           {
             oldtaskData.length >= 1
               ?
@@ -95,7 +95,7 @@ export default function All() {
 
                   <>
           
-                   <div className={`bg-white w-[100%]   backdrop-blur-lg flex  gap-2 justify-between  py-4 px-3 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
+                   <div className={`bg-white w-[100%]    backdrop-blur-lg flex  gap-2 justify-between  py-4 px-3 md:text-[15px] text-[14px] rounded-xl shadow-sm  text-black transition-all duration-500 ease-in-out
                   hover:scale-[1.01] hover:shadow-lg ${task.id === newTaskId
                       ? "translate-y-115 opacity-0 animate-slideUp rotate-18"
                       : "translate-y-0 opacity-100 rotate-0"}
@@ -110,7 +110,7 @@ export default function All() {
                         });
                         setOldTaskData(updatedData);
                       }} />
-                    <p className="bg-white w-full"
+                    <p className="bg-white w-full capitalize "
                       onClick={() => {
                         setTaskBar(true);
                         setActivePanel(PANELS.ALL);
@@ -137,8 +137,8 @@ export default function All() {
 
               
               :
-              <div className="max-w-[50%]  mt-7 mx-auto ">
-                <img src={noAllTaskImage} width="300" height="300" alt="No tasks available" />
+              <div className="flex justify-center items-center h-full ">
+                <img src={noAllTaskImage} width="200" height="200" alt="No tasks available" />
               </div>
           }
 
@@ -177,7 +177,7 @@ export default function All() {
                 </div>
 
         {/* theme panel */}
-        <div className={` hidden md:block md:w-[18vw] fixed  right-[4vw] z-990 bg-white backdrop-blur-lg p-6 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'top-[9%] opacity-100 visible ' : 'top-[3%] invisible opacity-0'}
+        <div className={` hidden md:block md:w-[18vw] fixed capitalize  right-[4vw] z-990 bg-white backdrop-blur-lg p-6 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'top-[9%] opacity-100 visible ' : 'top-[3%] invisible opacity-0'}
         `} >
 
           <p className="text-[14px] font-bold mb-4">Change Theme</p>
@@ -265,7 +265,7 @@ export default function All() {
 
       {/* for mobile theme panel */}
 
-      <div className={` md:hidden w-[80vw] fixed   left-[10vw] z-999 bg-white backdrop-blur-lg p-5 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'bottom-[5%] opacity-100 visible' : 'bottom-[-1%] invisible opacity-0'}`} >
+      <div className={` md:hidden w-[80vw] fixed capitalize  left-[10vw] z-999 bg-white backdrop-blur-lg p-5 rounded-xl shadow-lg  duration-300 ease-in-out  ${activeEditPanel ? 'bottom-[5%] opacity-100 visible' : 'bottom-[-1%] invisible opacity-0'}`} >
 
         <p className="text-[15px]  mb-4"> Theme</p>
 

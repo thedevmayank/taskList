@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import focusTaskImage from "../assets/One_task_at_a_time_doodle-removebg-preview.png"
 
-export default function PlannedPanel({ 
+export default function AllPanel({ 
   selectedTaskItem, 
   setSelectedTaskItem,
   oldtaskData, 
@@ -36,44 +37,43 @@ export default function PlannedPanel({
 
   return (
     <>
-      <div>
+    <main className=' max-w-full   flex flex-col  flex-wrap gap-29 md:gap-48  justify-between'>
+      <div className=' flex flex-col gap-3 outline-none'>
         {selectedTaskItem ? (
           <>
-            <h2>Editing Task</h2>
+          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-3'>
+     
 
             {/*  Input */}
-            <input
-              type="text"
+            <textarea
+              
               value={editTaskName}
               onChange={(e) => setEditTaskName(e.target.value)}
-              className="border p-2 rounded w-full mb-2"
+              height={200}
+              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none resize-none bg-gray-100 "
               placeholder="Edit task name"
             />
-
-            {/* ✅ Textarea */}
+        </div>
+         
+            {/* Textarea */}  
             <textarea
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
-              className="border p-2 rounded w-full mb-2"
+              className=" p-2 rounded w-full mb-2 h-30 border border-gray-300 outline-none  resize-none bg-gray-100 "
               placeholder="Write notes..."
             />
 
-          
+          </div>
 
             {/* ✅ Save Button */}
             <button
               onClick={handleSave}
-              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mr-2"
+              className="px-4 py-2 bg-sky-500  w-full  text-white rounded cursor-pointer hover:bg-sky-600 mr-2"
             >
               Save
             </button>
-          </>
-        ) : (
-          <p>No task selected</p>
-        )}
-      </div>
-
-      <div>
+            <div>
         {selectedTaskItem && (
           <button
             onClick={() => {
@@ -87,12 +87,20 @@ export default function PlannedPanel({
               setSelectedTaskItem(null);}
               setTaskBar(false);
             }}
-            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mt-2"
+            className="px-4 py-2 bg-red-500 text-white w-full rounded cursor-pointer hover:bg-red-600 mt-2"
           >
             Delete Task
           </button>
         )}
       </div>
+          </>
+        ) : (
+          <p>No task selected</p>
+        )}
+      </div>
+     <p className='uppercase text-center text-sm text-gray-400 font-semibold'>🧠 Clear mind. Clear tasks.</p>
+      
+      </main>
     </>
   );
 }
