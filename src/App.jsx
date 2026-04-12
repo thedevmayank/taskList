@@ -26,8 +26,8 @@ function App() {
   return (
 
     <>
-       <main className={`bg-[f5f5f5] w-[100%] h-[100vh] md:p-3  `}>
-    <div className='max-w-[98vw] h-[97%] mx-auto 
+       <main className={`bg-[f5f5f5] w-[100%] min-h-[100dvh] md:p-3  `}>
+    <div className='max-w-[98vw] md:h-[95vh] mx-auto 
 hidden md:grid md:grid-cols-[15%_auto] 
 rounded-lg shadow-lg'>
 

@@ -68,7 +68,7 @@ export default function All() {
 
     <>
 
-      <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-screen ${theme} flex flex-col flex-between   px-4  `}>
+      <div className={` bg-gradient-to-r from-[#a8edea] to-[#fed6e3] w-[100%] min-h-[100dvh] ${theme}  flex flex-col justify-between   px-4  `}>
         <div className="md:w-[75%] w-[100%] text-black  mt-5 md:mt-0 flex justify-between items-center px-4  py-4">
           <p className="md:text-[20px]   text-[16px] font-bold flex gap-3 items-center">
             <img src={AllPic} alt="" width="30" height="30" className="hidden md:block  " />  ALL TASKS</p>
